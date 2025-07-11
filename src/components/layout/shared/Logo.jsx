@@ -15,7 +15,8 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import useVerticalNav from '@menu/hooks/useVerticalNav'
 import { useSettings } from '@core/hooks/useSettings'
-
+import Image from 'next/image'
+import rbsLogo from '@/assets/logos/rbslogo.png'
 const LogoText = styled.span`
   color: ${({ color }) => color ?? 'var(--mui-palette-text-primary)'};
   font-size: 1.375rem;
@@ -59,7 +60,8 @@ const Logo = ({ color }) => {
 
   return (
     <div className='flex items-center'>
-      <VuexyLogo className='text-2xl text-primary' />
+      <Image src={rbsLogo} alt='Rise Build Soft' width={175} height={40} onClick={() => navigate('/')} />
+      {/* <VuexyLogo className='text-2xl text-primary' />
       <LogoText
         color={color}
         ref={logoTextRef}
@@ -69,7 +71,7 @@ const Logo = ({ color }) => {
         isBreakpointReached={isBreakpointReached}
       >
         {themeConfig.templateName}
-      </LogoText>
+      </LogoText> */}
     </div>
   )
 }

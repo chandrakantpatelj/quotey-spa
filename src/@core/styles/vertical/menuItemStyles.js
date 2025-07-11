@@ -11,48 +11,38 @@ const menuItemStyles = (verticalNavOptions, theme) => {
   return {
     root: ({ level }) => ({
       ...(!isPopoutWhenCollapsed || popoutExpanded || (popoutCollapsed && level === 0)
-        ? {
-            marginBlockStart: theme.spacing(1.5)
-          }
-        : {
-            marginBlockStart: 0
-          }),
-      [`&.${menuClasses.subMenuRoot}.${menuClasses.open} > .${menuClasses.button}, &.${menuClasses.subMenuRoot} > .${menuClasses.button}.${menuClasses.active}`]:
-        {
-          backgroundColor: 'var(--mui-palette-action-selected) !important'
-        },
-      [`&.${menuClasses.disabled} > .${menuClasses.button}`]: {
-        color: 'var(--mui-palette-text-disabled)',
-        '& *': {
-          color: 'inherit'
+        ? { marginBlockStart: theme.spacing(1.5) }
+        : { marginBlockStart: 0 }),
+
+      // Submenu root active
+      [`&.${menuClasses.subMenuRoot}.${menuClasses.open} > .${menuClasses.button}, 
+        &.${menuClasses.subMenuRoot} > .${menuClasses.button}.${menuClasses.active}`]: {
+        backgroundColor: '#0A69241A !important',
+        color: '#0A6924 !important',
+        borderRadius: 8,
+        [`& .${menuClasses.icon}`]: {
+          color: '#0A6924 !important'
         }
       },
+
+      // Disabled style
+      [`&.${menuClasses.disabled} > .${menuClasses.button}`]: {
+        color: 'var(--mui-palette-text-disabled)',
+        '& *': { color: 'inherit' }
+      },
+
+      // Active (non-submenu)
       [`&:not(.${menuClasses.subMenuRoot}) > .${menuClasses.button}.${menuClasses.active}`]: {
-        ...(popoutCollapsed && level > 0
-          ? {
-              backgroundColor: 'var(--mui-palette-primary-lightOpacity)',
-              color: 'var(--mui-palette-primary-main)',
-              [`& .${menuClasses.icon}`]: {
-                color: 'var(--mui-palette-primary-main)'
-              }
-            }
-          : {
-              color: 'var(--mui-palette-primary-contrastText)',
-              background:
-                theme.direction === 'ltr'
-                  ? `linear-gradient(270deg,
-                    rgb(var(--mui-palette-primary-mainChannel) / 0.7) 0%,
-                    var(--mui-palette-primary-main) 100%) !important`
-                  : `linear-gradient(270deg,
-                     var(--mui-palette-primary-main) 100%,
-                     rgb(var(--mui-palette-primary-mainChannel) / 0.7) 100%) !important`,
-              boxShadow: 'var(--mui-customShadows-primary-sm)',
-              [`& .${menuClasses.icon}`]: {
-                color: 'inherit'
-              }
-            })
+        backgroundColor: '#0A69241A !important',
+        color: '#0A6924 !important',
+        boxShadow: 'none',
+        [`& .${menuClasses.icon}`]: {
+          color: '#0A6924 !important'
+        }
       }
     }),
+
+    // Default button style + hover/focus
     button: ({ level, active }) => ({
       paddingBlock: '8px',
       paddingInline: '12px',
@@ -68,28 +58,32 @@ const menuItemStyles = (verticalNavOptions, theme) => {
       }),
       ...(!active && {
         '&:hover, &:focus-visible': {
-          backgroundColor: 'var(--mui-palette-action-hover)'
+          backgroundColor: '#0A69241A',
+          color: '#0A6924',
+          [`& .${menuClasses.icon}`]: {
+            color: '#0A6924'
+          }
         },
         '&[aria-expanded="true"]': {
-          backgroundColor: 'var(--mui-palette-action-selected)'
+          backgroundColor: '#0A69241A',
+          color: '#0A6924',
+          [`& .${menuClasses.icon}`]: {
+            color: '#0A6924'
+          }
         }
       })
     }),
-    icon: ({ level }) => ({
+
+    icon: ({ level, active }) => ({
       transition: `margin-inline-end ${transitionDuration}ms ease-in-out`,
-      ...(level === 0 && {
-        fontSize: '1.375rem'
-      }),
+      color: active ? '#0A6924' : '#011408',
+      fontWeight: 700,
+      ...(level === 0 && { fontSize: '1.375rem' }),
       ...(level > 0 && {
-        fontSize: '0.75rem',
-        color: 'var(--mui-palette-text-secondary)'
+        fontSize: '0.75rem'
       }),
-      ...(level === 0 && {
-        marginInlineEnd: theme.spacing(2)
-      }),
-      ...(level > 0 && {
-        marginInlineEnd: theme.spacing(3.5)
-      }),
+      ...(level === 0 && { marginInlineEnd: theme.spacing(2) }),
+      ...(level > 0 && { marginInlineEnd: theme.spacing(3.5) }),
       ...(level === 1 &&
         !popoutCollapsed && {
           marginInlineStart: theme.spacing(1.5)
@@ -97,9 +91,7 @@ const menuItemStyles = (verticalNavOptions, theme) => {
       ...(level > 1 && {
         marginInlineStart: theme.spacing((popoutCollapsed ? 0 : 1.5) + 2.5 * (level - 1))
       }),
-      ...(collapsedNotHovered && {
-        marginInlineEnd: 0
-      }),
+      ...(collapsedNotHovered && { marginInlineEnd: 0 }),
       ...(popoutCollapsed &&
         level > 0 && {
           marginInlineEnd: theme.spacing(2)
@@ -108,20 +100,25 @@ const menuItemStyles = (verticalNavOptions, theme) => {
         fontSize: 'inherit'
       }
     }),
+
     prefix: {
       marginInlineEnd: theme.spacing(2)
     },
-    label: ({ level }) => ({
+
+    label: ({ level, active }) => ({
+      fontWeight: 700,
+      fontSize: '1rem',
+      color: active ? '#0A6924' : '#011408',
       ...((!isPopoutWhenCollapsed || popoutExpanded || (popoutCollapsed && level === 0)) && {
         transition: `opacity ${transitionDuration}ms ease-in-out`,
-        ...(collapsedNotHovered && {
-          opacity: 0
-        })
+        ...(collapsedNotHovered && { opacity: 0 })
       })
     }),
+
     suffix: {
       marginInlineStart: theme.spacing(2)
     },
+
     subMenuExpandIcon: {
       fontSize: '1.25rem',
       marginInlineStart: theme.spacing(2),
@@ -129,6 +126,7 @@ const menuItemStyles = (verticalNavOptions, theme) => {
         fontSize: 'inherit'
       }
     },
+
     subMenuContent: ({ level }) => ({
       zIndex: 'calc(var(--drawer-z-index) + 1)',
       borderRadius: 'var(--border-radius)',

@@ -24,7 +24,7 @@ const colorSchemes = skin => {
           darkerOpacity: 'rgb(var(--mui-palette-secondary-mainChannel) / 0.38)'
         },
         error: {
-          main: '#FF4C51',
+          main: '#FF0000',
           light: '#FF7074',
           dark: '#E64449',
           contrastText: '#FFF',
@@ -46,7 +46,7 @@ const colorSchemes = skin => {
           darkerOpacity: 'rgb(var(--mui-palette-warning-mainChannel) / 0.38)'
         },
         info: {
-          main: '#00BAD1',
+          main: '#2684FF',
           light: '#33C8DA',
           dark: '#00A7BC',
           contrastText: '#FFF',
@@ -57,7 +57,7 @@ const colorSchemes = skin => {
           darkerOpacity: 'rgb(var(--mui-palette-info-mainChannel) / 0.38)'
         },
         success: {
-          main: '#28C76F',
+          main: '#0A6924',
           light: '#53D28C',
           dark: '#24B364',
           contrastText: '#FFF',
@@ -68,7 +68,7 @@ const colorSchemes = skin => {
           darkerOpacity: 'rgb(var(--mui-palette-success-mainChannel) / 0.38)'
         },
         text: {
-          primary: `rgb(var(--mui-mainColorChannels-light) / 0.9)`,
+          primary: `#646464`,
           secondary: `rgb(var(--mui-mainColorChannels-light) / 0.7)`,
           disabled: `rgb(var(--mui-mainColorChannels-light) / 0.4)`,
           primaryChannel: 'var(--mui-mainColorChannels-light)',

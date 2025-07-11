@@ -1,16 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  basePath: process.env.BASEPATH,
-  redirects: async () => {
-    return [
-      {
-        source: '/',
-        destination: '/home',
-        permanent: true,
-        locale: false
-      }
-    ]
-  }
-}
+const nextConfig = { experimental: { turbo: { loaders: { '.js': ['default'] } } } }
 
 export default nextConfig
