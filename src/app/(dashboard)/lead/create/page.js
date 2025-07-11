@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+
 import { Box, Button, Grid2, TextField, Typography } from '@mui/material'
 import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
@@ -13,14 +14,7 @@ function Page() {
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm({
-    defaultValues: {
-      name: '',
-      address: '',
-      source: '',
-      assignee: ''
-    }
-  })
+  } = useForm({ defaultValues: { name: '', address: '', source: '', assignee: '' } })
 
   const onSubmit = data => {
     toast.success('Form Submitted')
