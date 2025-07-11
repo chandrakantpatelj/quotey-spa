@@ -46,7 +46,7 @@
     }
   },
   "include": [
-    "next.config.js",
+    "next.config.mjs",
     "tailwind.config.js",
     "**/*.js",
     "**/*.jsx"
