@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: process.env.BASEPATH,
-  redirects: async () => {
+  async redirects() {
     return [
       {
         source: '/',
@@ -13,4 +13,4 @@ const nextConfig = {
   }
 }
 
-export default nextConfig
+module.exports = nextConfig
