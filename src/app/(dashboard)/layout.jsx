@@ -1,5 +1,6 @@
-// MUI Imports
+// External Imports
 import Button from '@mui/material/Button'
+import { Toaster } from 'react-hot-toast'
 
 // Layout Imports
 import LayoutWrapper from '@layouts/LayoutWrapper'
@@ -17,8 +18,10 @@ import ScrollToTop from '@core/components/scroll-to-top'
 
 // Util Imports
 import { getMode, getSystemMode } from '@core/utils/serverHelpers'
-import { Toaster } from 'react-hot-toast'
+
+// Redux
 import ReduxProviders from '../ReduxProviders'
+
 const Layout = async props => {
   const { children } = props
 

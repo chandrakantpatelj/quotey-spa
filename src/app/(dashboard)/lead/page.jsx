@@ -1,5 +1,9 @@
 'use client'
+
 import React, { useEffect, useState } from 'react'
+
+import { useRouter } from 'next/navigation'
+
 import {
   Box,
   Button,
@@ -15,28 +19,31 @@ import {
   Autocomplete,
   Grid2
 } from '@mui/material'
+
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined'
-import { DataGrid, GridColDef, useGridApiRef } from '@mui/x-data-grid'
 import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined'
+
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
-import { useRouter } from 'next/navigation'
+
+import { DataGrid, useGridApiRef } from '@mui/x-data-grid'
+
 import { useDispatch, useSelector } from 'react-redux'
+
 import { setLeads } from '@/redux/slices/leadSlice'
 
 export function IconButtonsGroup() {
   const router = useRouter()
   const isMobile = useMediaQuery('(max-width:600px)')
+
   const iconBoxStyle = {
     border: '1px solid #E0E0E0',
     borderRadius: 2,
     padding: 1.5,
     backgroundColor: '#fff',
-    '&:hover': {
-      backgroundColor: '#f9f9f9'
-    }
+    '&:hover': { backgroundColor: '#f9f9f9' }
   }
 
   return (
@@ -64,6 +71,7 @@ export function IconButtonsGroup() {
           <FileUploadOutlinedIcon sx={{ color: '#1B5E20' }} />
         </IconButton>
       </Tooltip>
+
       {isMobile ? (
         <Tooltip title='Add Lead'>
           <IconButton sx={iconBoxStyle} onClick={() => router.push('/lead/create')}>
@@ -78,6 +86,7 @@ export function IconButtonsGroup() {
     </Box>
   )
 }
+
 export function LeadTable() {
   const isMobile = useMediaQuery('(max-width:600px)')
   const apiRef = useGridApiRef()
@@ -87,42 +96,22 @@ export function LeadTable() {
       'Closed one': {
         label: 'Closed one',
         color: 'success',
-        sx: {
-          fontSize: '10px',
-          fontWeight: 600,
-          height: 20,
-          lineHeight: '16px',
-          padding: '0 6px',
-          borderRadius: '8px'
-        }
+        sx: { fontSize: '10px', fontWeight: 600, height: 20, lineHeight: '16px', padding: '0 6px', borderRadius: '8px' }
       },
       'Closed Lost': {
         label: 'Closed Lost',
         color: 'error',
-        sx: {
-          fontSize: '10px',
-          fontWeight: 600,
-          height: 20,
-          lineHeight: '16px',
-          padding: '0 6px',
-          borderRadius: '8px'
-        }
+        sx: { fontSize: '10px', fontWeight: 600, height: 20, lineHeight: '16px', padding: '0 6px', borderRadius: '8px' }
       },
       Open: {
         label: 'Open',
         color: 'info',
-        sx: {
-          fontSize: '10px',
-          fontWeight: 600,
-          height: 20,
-          lineHeight: '16px',
-          padding: '0 6px',
-          borderRadius: '8px'
-        }
+        sx: { fontSize: '10px', fontWeight: 600, height: 20, lineHeight: '16px', padding: '0 6px', borderRadius: '8px' }
       }
     }
 
     const config = chipStyles[status] || {}
+
     return <Chip size='small' label={config.label} color={config.color} sx={config.sx} />
   }
 
@@ -173,7 +162,6 @@ export function LeadTable() {
       headerName: '',
       sortable: false,
       flex: 0.3,
-
       renderCell: () => (
         <IconButton>
           <OpenInNewIcon fontSize='small' color='success' />
@@ -195,12 +183,7 @@ export function LeadTable() {
   }))
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        overflowX: 'auto'
-      }}
-    >
+    <Box sx={{ width: '100%', overflowX: 'auto' }}>
       <Box sx={{ minWidth: '800px' }}>
         <DataGrid
           rows={rows}
@@ -211,52 +194,31 @@ export function LeadTable() {
           sx={{
             backgroundColor: '#FFFFFF',
             border: 'none',
-
-            // Column header area
             '& .MuiDataGrid-columnHeaders': {
               backgroundColor: '#FFFFFF',
               color: '#011408 !important',
               fontWeight: '400'
             },
-
-            // Individual header cells
-            '& .MuiDataGrid-columnHeader': {
-              backgroundColor: '#FFFFFF'
-            },
-
-            // Optional: also override separators if needed
-            '& .MuiDataGrid-columnSeparator': {
-              display: 'none'
-            },
-
-            // Table body cells
+            '& .MuiDataGrid-columnHeader': { backgroundColor: '#FFFFFF' },
+            '& .MuiDataGrid-columnSeparator': { display: 'none' },
             '& .MuiDataGrid-cell': {
               backgroundColor: '#FFFFFF',
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis'
             },
-
-            // Virtual scroller background (rows area)
-            '& .MuiDataGrid-virtualScroller': {
-              backgroundColor: '#FFFFFF'
-            },
-
-            // Footer (pagination) area
-            '& .MuiDataGrid-footerContainer': {
-              backgroundColor: '#FFFFFF'
-            }
+            '& .MuiDataGrid-virtualScroller': { backgroundColor: '#FFFFFF' },
+            '& .MuiDataGrid-footerContainer': { backgroundColor: '#FFFFFF' }
           }}
           pageSizeOptions={[10, 20, 50]}
-          initialState={{
-            pagination: { paginationModel: { pageSize: 10, page: 0 } }
-          }}
+          initialState={{ pagination: { paginationModel: { pageSize: 10, page: 0 } } }}
         />
       </Box>
     </Box>
   )
 }
-function page() {
+
+function Page() {
   const router = useRouter()
   const [value, setValue] = useState(0)
   const dispatch = useDispatch()
@@ -280,26 +242,20 @@ function page() {
       assignee: 'RA',
       status: i % 3 === 0 ? 'Closed one' : i % 3 === 1 ? 'Closed Lost' : 'Open'
     }))
+
     dispatch(setLeads(rows))
-  }, [])
+  }, [dispatch])
 
   return (
     <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Box
-        sx={{
-          width: '100%',
-          height: '3.5rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}
+        sx={{ width: '100%', height: '3.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
       >
-        <Box>
-          <Typography variant='h4' component='h4' fontWeight={700}>
-            Leads
-          </Typography>
-        </Box>
-        <Box>{<IconButtonsGroup />}</Box>
+        <Typography variant='h4' component='h4' fontWeight={700}>
+          Leads
+        </Typography>
+
+        <IconButtonsGroup />
       </Box>
 
       <Box sx={{ borderBottom: 1, borderColor: '#ccc', mb: 3 }}>
@@ -309,15 +265,8 @@ function page() {
           textColor='inherit'
           TabIndicatorProps={{ style: { backgroundColor: '#2E7D32', height: 3 } }}
           sx={{
-            '& .MuiTab-root': {
-              textTransform: 'none',
-              fontWeight: 500,
-              color: '#A0A0A0'
-            },
-            '& .Mui-selected': {
-              color: '#2E7D32',
-              fontWeight: 600
-            }
+            '& .MuiTab-root': { textTransform: 'none', fontWeight: 500, color: '#A0A0A0' },
+            '& .Mui-selected': { color: '#2E7D32', fontWeight: 600 }
           }}
         >
           {tabs.map((label, index) => (
@@ -325,138 +274,80 @@ function page() {
           ))}
         </Tabs>
       </Box>
+
       <Grid2 container spacing={2} p={3} mb={1} bgcolor={'#FFFFFF'}>
-        <Grid2 size={{ xs: 12, sm: 6, md: 1.5 }}>
-          <TextField
-            label='Reference ID'
-            size='small'
-            sx={{
-              '& .MuiInputLabel-root': {
-                color: '#CED1D7'
-              }
-            }}
-          />
+        <Grid2 xs={12} sm={6} md={1.5}>
+          <TextField label='Reference ID' size='small' sx={{ '& .MuiInputLabel-root': { color: '#CED1D7' } }} />
         </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 1.5 }}>
-          <TextField
-            label='Name'
-            size='small'
-            sx={{
-              '& .MuiInputLabel-root': {
-                color: '#CED1D7'
-              }
-            }}
-          />
+
+        <Grid2 xs={12} sm={6} md={1.5}>
+          <TextField label='Name' size='small' sx={{ '& .MuiInputLabel-root': { color: '#CED1D7' } }} />
         </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 2 }}>
-          {' '}
-          <TextField
-            label='Property Address'
-            size='small'
-            sx={{
-              '& .MuiInputLabel-root': {
-                color: '#CED1D7'
-              }
-            }}
-          />
+
+        <Grid2 xs={12} sm={6} md={2}>
+          <TextField label='Property Address' size='small' sx={{ '& .MuiInputLabel-root': { color: '#CED1D7' } }} />
         </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 2 }}>
-          {' '}
+
+        <Grid2 xs={12} sm={6} md={2}>
           <Autocomplete
             disablePortal
             options={['Internal', 'External']}
-            // sx={{ width: 150 }}
             renderInput={params => (
               <TextField
                 {...params}
                 label='Source'
                 sx={{
-                  '& .MuiInputBase-root': {
-                    height: '3em',
-                    fontSize: '13px'
-                  },
-                  '& .MuiInputLabel-root': {
-                    color: '#CED1D7',
-                    top: '-5px'
-                  }
+                  '& .MuiInputBase-root': { height: '3em', fontSize: '13px' },
+                  '& .MuiInputLabel-root': { color: '#CED1D7', top: '-5px' }
                 }}
               />
             )}
           />
         </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 1 }}>
-          {' '}
+
+        <Grid2 xs={12} sm={6} md={1}>
           <Autocomplete
             disablePortal
             options={['100', '200']}
-            // sx={{ width: 50 }}
             renderInput={params => (
               <TextField
                 {...params}
                 label='Rate'
                 sx={{
-                  '& .MuiInputBase-root': {
-                    height: '3em',
-                    fontSize: '13px'
-                  },
-                  '& .MuiInputLabel-root': {
-                    color: '#CED1D7',
-                    top: '-5px'
-                  }
+                  '& .MuiInputBase-root': { height: '3em', fontSize: '13px' },
+                  '& .MuiInputLabel-root': { color: '#CED1D7', top: '-5px' }
                 }}
               />
             )}
           />
         </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 1 }}>
-          {' '}
-          <TextField
-            label='Created'
-            size='small'
-            sx={{
-              '& .MuiInputLabel-root': {
-                color: '#CED1D7'
-              }
-            }}
-          />
+
+        <Grid2 xs={12} sm={6} md={1}>
+          <TextField label='Created' size='small' sx={{ '& .MuiInputLabel-root': { color: '#CED1D7' } }} />
         </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 1 }}>
-          {' '}
-          <TextField
-            label='Updated'
-            size='small'
-            sx={{
-              '& .MuiInputLabel-root': {
-                color: '#CED1D7'
-              }
-            }}
-          />
+
+        <Grid2 xs={12} sm={6} md={1}>
+          <TextField label='Updated' size='small' sx={{ '& .MuiInputLabel-root': { color: '#CED1D7' } }} />
         </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 2 }}>
-          {' '}
+
+        <Grid2 xs={12} sm={6} md={2}>
           <Autocomplete
             disablePortal
             options={['Steve Smith', 'Joe Root']}
-            // sx={{ width: "auto" }}
             renderInput={params => (
               <TextField
                 {...params}
-                label='Assinee'
+                label='Assignee'
                 sx={{
-                  '& .MuiInputBase-root': {
-                    height: '3em',
-                    fontSize: '13px'
-                  },
-                  '& .MuiInputLabel-root': {
-                    color: '#CED1D7',
-                    top: '-5px'
-                  }
+                  '& .MuiInputBase-root': { height: '3em', fontSize: '13px' },
+                  '& .MuiInputLabel-root': { color: '#CED1D7', top: '-5px' }
                 }}
               />
             )}
           />
         </Grid2>
       </Grid2>
+
       <Box>
         <LeadTable />
       </Box>
@@ -464,4 +355,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
