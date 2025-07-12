@@ -1,4 +1,4 @@
-const paper = {
+export default {
   MuiPaper: {
     styleOverrides: {
       root: {
@@ -7,5 +7,3 @@ const paper = {
     }
   }
 }
-
-export default paper

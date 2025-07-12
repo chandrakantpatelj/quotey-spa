@@ -1,57 +1,58 @@
-const menu = skin => ({
-  MuiMenu: {
-    defaultProps: {
-      ...(skin === 'bordered' && {
-        slotProps: {
-          paper: {
-            elevation: 0
-          }
-        }
-      })
-    },
-    styleOverrides: {
-      paper: ({ theme }) => ({
-        marginBlockStart: theme.spacing(0.5),
-        ...(skin !== 'bordered' && {
-          boxShadow: 'var(--mui-customShadows-lg)'
-        })
-      })
-    }
-  },
-  MuiMenuItem: {
-    styleOverrides: {
-      root: ({ theme }) => ({
-        paddingBlock: theme.spacing(2),
-        gap: theme.spacing(2),
-        color: 'var(--mui-palette-text-primary)',
-        marginInline: theme.spacing(2),
-        borderRadius: 'var(--mui-shape-borderRadius)',
-        '& i, & svg': {
-          fontSize: '1.375rem'
-        },
-        '& .MuiListItemIcon-root': {
-          minInlineSize: 0
-        },
-        '&:not(:last-of-type)': {
-          marginBlockEnd: theme.spacing(0.5)
-        },
-        '&.Mui-selected': {
-          backgroundColor: 'var(--mui-palette-primary-lightOpacity)',
-          color: 'var(--mui-palette-primary-main)',
-          '& .MuiListItemIcon-root': {
-            color: 'var(--mui-palette-primary-main)'
+// ** Util Import
+import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
+
+const Menu = () => {
+  return {
+    MuiMenu: {
+      styleOverrides: {
+        paper: ({ theme }) => ({
+          '& .MuiMenuItem-root .MuiCheckbox-root.Mui-checked path:first-of-type': {
+            fill: theme.palette.common.white
           },
-          '&:hover, &.Mui-focused, &.Mui-focusVisible': {
-            backgroundColor: 'var(--mui-palette-primary-mainOpacity)'
+          '& .MuiMenuItem-root .MuiCheckbox-root.Mui-checked path:last-of-type': {
+            fill: theme.palette.primary.main,
+            stroke: theme.palette.primary.main
           }
-        },
-        '&.Mui-disabled': {
-          color: 'var(--mui-palette-text-disabled)',
-          opacity: 0.45
-        }
-      })
+        })
+      }
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          fontSize: '12px',
+          padding: theme.spacing(2, 4),
+          margin: theme.spacing(0, 2, 1),
+          minHeight: 38,
+          borderRadius: theme.shape.borderRadius,
+          '&:last-of-type': {
+            marginBottom: 0
+          },
+          '&:not(.Mui-focusVisible):hover': {
+            color: theme.palette.primary.main,
+            backgroundColor: hexToRGBA(theme.palette.primary.main, 0.08),
+            '& .MuiListItemIcon-root, & .MuiListItemText-primary, & .MuiListItemText-secondary, & .MuiListItemSecondaryAction-root .MuiIconButton-root':
+              {
+                color: theme.palette.primary.main
+              }
+          },
+          '&.Mui-selected': {
+            color: `${theme.palette.common.white} !important`,
+            backgroundColor: `${theme.palette.primary.main} !important`,
+            '&.Mui-focusVisible': {
+              backgroundColor: `${theme.palette.primary.dark} !important`
+            },
+            '& .MuiListItemIcon-root, & .MuiListItemText-primary, & .MuiListItemText-secondary, & .MuiListItemSecondaryAction-root .MuiIconButton-root':
+              {
+                color: `${theme.palette.common.white} !important`
+              }
+          }
+        })
+      },
+      defaultProps: {
+        disableRipple: true
+      }
     }
   }
-})
+}
 
-export default menu
+export default Menu

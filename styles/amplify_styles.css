@@ -1,0 +1,24 @@
+:root {
+    --primary-color: "#4567C6 ";
+    --amplify-colors-background-primary: "#4567C6 !important"
+}
+
+
+
+.amplify-button[data-variation='primary'] {
+    /* background-color: '#4567C6 !important' */
+    /* background-color: var(--primary-color); */
+    background-color: "#4567C6 !important";
+
+}
+
+.amplify-button {
+    /* background-color: '#4567C6 !important' */
+    /* background-color: var(--primary-color); */
+    background-color: "red !important";
+
+}
+
+[data-amplify-authenticator] {
+    display: 'flex !important'
+}
