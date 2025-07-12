@@ -21,6 +21,8 @@ import { getMode, getSystemMode } from '@core/utils/serverHelpers'
 
 // Redux
 import ReduxProviders from '../ReduxProviders'
+import { AuthProvider } from '@/contexts/AuthContext'
+import '@/lib/aws-config'
 
 const Layout = async props => {
   const { children } = props
@@ -32,6 +34,7 @@ const Layout = async props => {
 
   return (
     <ReduxProviders>
+      <AuthProvider>Hello </AuthProvider>
       <Providers direction={direction}>
         <Toaster position='bottom-right' toastOptions={{ duration: 3000 }} />
         <LayoutWrapper
