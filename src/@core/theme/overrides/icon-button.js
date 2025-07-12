@@ -1,145 +1,74 @@
-// Config Imports
-import themeConfig from '@configs/themeConfig'
+// ** Util Import
+import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
-const iconButton = {
+const IconButton = {
   MuiIconButton: {
-    styleOverrides: {
-      root: {
-        '& .MuiSvgIcon-root, & i, & svg': {
-          fontSize: 'inherit'
-        },
-        variants: [
-          {
-            props: { color: 'default' },
-            style: {
-              '&:not(.Mui-disabled):hover, &:not(.Mui-disabled):active': {
-                backgroundColor: 'rgb(var(--mui-palette-text-primaryChannel) / 0.08)'
-              },
-              ...(themeConfig.disableRipple && {
-                '&.Mui-focusVisible:not(.Mui-disabled)': {
-                  backgroundColor: 'rgb(var(--mui-palette-text-primaryChannel) / 0.08)'
-                }
-              }),
-              '&.Mui-disabled': {
-                opacity: 0.45,
-                color: 'var(--mui-palette-action-active)'
-              }
-            }
-          },
-          {
-            props: { color: 'primary' },
-            style: {
-              '&:not(.Mui-disabled):hover, &:not(.Mui-disabled):active': {
-                backgroundColor: 'var(--mui-palette-primary-lighterOpacity)'
-              },
-              ...(themeConfig.disableRipple && {
-                '&.Mui-focusVisible:not(.Mui-disabled)': {
-                  backgroundColor: 'var(--mui-palette-primary-lighterOpacity)'
-                }
-              }),
-              '&.Mui-disabled': {
-                opacity: 0.45,
-                color: 'var(--mui-palette-primary-main)'
-              }
-            }
-          },
-          {
-            props: { color: 'secondary' },
-            style: {
-              '&:not(.Mui-disabled):hover, &:not(.Mui-disabled):active': {
-                backgroundColor: 'var(--mui-palette-secondary-lighterOpacity)'
-              },
-              ...(themeConfig.disableRipple && {
-                '&.Mui-focusVisible:not(.Mui-disabled)': {
-                  backgroundColor: 'var(--mui-palette-secondary-lighterOpacity)'
-                }
-              }),
-              '&.Mui-disabled': {
-                opacity: 0.45,
-                color: 'var(--mui-palette-secondary-main)'
-              }
-            }
-          },
-          {
-            props: { color: 'error' },
-            style: {
-              '&:not(.Mui-disabled):hover, &:not(.Mui-disabled):active': {
-                backgroundColor: 'var(--mui-palette-error-lighterOpacity)'
-              },
-              ...(themeConfig.disableRipple && {
-                '&.Mui-focusVisible:not(.Mui-disabled)': { backgroundColor: 'var(--mui-palette-error-lighterOpacity)' }
-              }),
-              '&.Mui-disabled': {
-                opacity: 0.45,
-                color: 'var(--mui-palette-error-main)'
-              }
-            }
-          },
-          {
-            props: { color: 'warning' },
-            style: {
-              '&:not(.Mui-disabled):hover, &:not(.Mui-disabled):active': {
-                backgroundColor: 'var(--mui-palette-warning-lighterOpacity)'
-              },
-              ...(themeConfig.disableRipple && {
-                '&.Mui-focusVisible:not(.Mui-disabled)': {
-                  backgroundColor: 'var(--mui-palette-warning-lighterOpacity)'
-                }
-              }),
-              '&.Mui-disabled': {
-                opacity: 0.45,
-                color: 'var(--mui-palette-warning-main)'
-              }
-            }
-          },
-          {
-            props: { color: 'info' },
-            style: {
-              '&:not(.Mui-disabled):hover, &:not(.Mui-disabled):active': {
-                backgroundColor: 'var(--mui-palette-info-lighterOpacity)'
-              },
-              ...(themeConfig.disableRipple && {
-                '&.Mui-focusVisible:not(.Mui-disabled)': { backgroundColor: 'var(--mui-palette-info-lighterOpacity)' }
-              }),
-              '&.Mui-disabled': {
-                opacity: 0.45,
-                color: 'var(--mui-palette-info-main)'
-              }
-            }
-          },
-          {
-            props: { color: 'success' },
-            style: {
-              '&:not(.Mui-disabled):hover, &:not(.Mui-disabled):active': {
-                backgroundColor: 'var(--mui-palette-success-lighterOpacity)'
-              },
-              ...(themeConfig.disableRipple && {
-                '&.Mui-focusVisible:not(.Mui-disabled)': {
-                  backgroundColor: 'var(--mui-palette-success-lighterOpacity)'
-                }
-              }),
-              '&.Mui-disabled': {
-                opacity: 0.45,
-                color: 'var(--mui-palette-success-main)'
-              }
-            }
+    variants: [
+      {
+        props: { color: 'primary' },
+        style: ({ theme }) => ({
+          '&:hover': {
+            backgroundColor: hexToRGBA(theme.palette.primary.main, 0.08)
           }
-        ]
+        })
       },
-      sizeSmall: ({ theme }) => ({
-        padding: theme.spacing(1.25),
-        fontSize: '1.25rem'
+      {
+        props: { color: 'secondary' },
+        style: ({ theme }) => ({
+          '&:hover': {
+            backgroundColor: hexToRGBA(theme.palette.secondary.main, 0.08)
+          }
+        })
+      },
+      {
+        props: { color: 'success' },
+        style: ({ theme }) => ({
+          '&:hover': {
+            backgroundColor: hexToRGBA(theme.palette.success.main, 0.08)
+          }
+        })
+      },
+      {
+        props: { color: 'error' },
+        style: ({ theme }) => ({
+          '&:hover': {
+            backgroundColor: hexToRGBA(theme.palette.error.main, 0.08)
+          }
+        })
+      },
+      {
+        props: { color: 'warning' },
+        style: ({ theme }) => ({
+          '&:hover': {
+            backgroundColor: hexToRGBA(theme.palette.warning.main, 0.08)
+          }
+        })
+      },
+      {
+        props: { color: 'info' },
+        style: ({ theme }) => ({
+          '&:hover': {
+            backgroundColor: hexToRGBA(theme.palette.info.main, 0.08)
+          }
+        })
+      }
+    ],
+    styleOverrides: {
+      root: ({ theme }) => ({
+        padding: '6px',
+        '& svg': {
+          fontSize: '20px'
+        },
+        '&:hover': {
+          // backgroundColor: `rgba(${theme.palette.customColors.main}, 0.08)`
+        }
       }),
-      sizeMedium: ({ theme }) => ({
-        padding: theme.spacing(2),
-        fontSize: '1.375rem'
-      }),
-      sizeLarge: ({ theme }) => ({
-        padding: theme.spacing(3),
-        fontSize: '1.5rem'
+      sizeSmall: () => ({
+        width: '30px',
+        height: '30px'
       })
     }
   }
 }
 
-export default iconButton
+export default IconButton

@@ -1,76 +1,35 @@
-# Node.js
-node_modules/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+.idea/
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
 
-# Logs
-logs
-*.log
-logs/**/*.log
+# local env files
+.env*.local
 
-# Dependency directories
-.pnp/
-.pnp.js
+# vercel
+.vercel
 
-# Build output
-dist/
-build/
-.next/
-out/
-
-# Coverage directory
-coverage/
-
-# Environment files
-.env
-.env.*.local
-.env.local
-
-# Misc
-.DS_Store
-Thumbs.db
-*.pem
-
-# IDE and editor folders
-.idea/
-.vscode/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-
-# Mac system files
-.AppleDouble
-.LSOverride
-
-# TypeScript
+# typescript
 *.tsbuildinfo
-
-# VS Code settings
-.vscode/
-
-# Optional npm cache
-.npm/
-
-# Vercel
-.vercel/
-
-# Static exports from Next.js
-out/
-
-# Optional lock files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# Ignore local MongoDB data dumps
-dump/
-
-# Ignore uploads or local static assets if stored in public
-/public/uploads
-/public/tmp
-
-# Ignore frontend production build (if using create-react-app or similar)
-frontend/build/

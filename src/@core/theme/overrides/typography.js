@@ -1,66 +1,65 @@
 const typography = {
   MuiTypography: {
     styleOverrides: {
-      root: {
-        variants: [
-          {
-            props: { variant: 'h1' },
-            style: { color: 'var(--mui-palette-text-primary)' }
-          },
-          {
-            props: { variant: 'h2' },
-            style: { color: 'var(--mui-palette-text-primary)' }
-          },
-          {
-            props: { variant: 'h3' },
-            style: { color: 'var(--mui-palette-text-primary)' }
-          },
-          {
-            props: { variant: 'h4' },
-            style: { color: 'var(--mui-palette-text-primary)' }
-          },
-          {
-            props: { variant: 'h5' },
-            style: { color: 'var(--mui-palette-text-primary)' }
-          },
-          {
-            props: { variant: 'h6' },
-            style: { color: 'var(--mui-palette-text-primary)' }
-          },
-          {
-            props: { variant: 'subtitle1' },
-            style: { color: 'rgb(var(--mui-palette-text-primaryChannel) / 0.55)' }
-          },
-          {
-            props: { variant: 'subtitle2' },
-            style: { color: 'rgb(var(--mui-palette-text-primaryChannel) / 0.55)' }
-          },
-          {
-            props: { variant: 'body1' },
-            style: { color: 'var(--mui-palette-text-secondary)' }
-          },
-          {
-            props: { variant: 'body2' },
-            style: { color: 'var(--mui-palette-text-secondary)' }
-          },
-          {
-            props: { variant: 'button' },
-            style: { color: 'var(--mui-palette-text-primary)' }
-          },
-          {
-            props: { variant: 'caption' },
-            style: { color: 'var(--mui-palette-text-disabled)' }
-          },
-          {
-            props: { variant: 'overline' },
-            style: { color: 'var(--mui-palette-text-primary)' }
-          }
-        ]
-      },
       gutterBottom: ({ theme }) => ({
-        marginBottom: theme.spacing(2)
+        color: '#000'
+        // marginBottom: theme.spacing(2)
       })
-    }
+    },
+    variants: [
+      {
+        props: { variant: 'h1' },
+        style: ({ theme }) => ({ color: theme.palette.text.primary, marginBottom: 'unset' })
+      },
+      {
+        props: { variant: 'h2' },
+        style: ({ theme }) => ({ color: theme.palette.text.primary, marginBottom: 'unset' })
+      },
+      {
+        props: { variant: 'h3' },
+        style: ({ theme }) => ({ color: theme.palette.text.primary, marginBottom: 'unset' })
+      },
+      {
+        props: { variant: 'h4' },
+        style: ({ theme }) => ({ color: theme.palette.text.primary, marginBottom: 'unset' })
+      },
+      {
+        props: { variant: 'h5' },
+        style: ({ theme }) => ({ color: theme.palette.text.primary, marginBottom: 'unset' })
+      },
+      {
+        props: { variant: 'h6' },
+        style: ({ theme }) => ({ color: theme.palette.text.primary, marginBottom: '0px' })
+      },
+      {
+        props: { variant: 'subtitle1' },
+        style: ({ theme }) => ({ color: theme.palette.text.primary, margin: '0px' })
+      },
+      {
+        props: { variant: 'subtitle2' },
+        style: ({ theme }) => ({ color: theme.palette.text.secondary, marginBottom: 'unset' })
+      },
+      {
+        props: { variant: 'body1' },
+        style: ({ theme }) => ({ color: theme.palette.text.primary, marginBottom: 'unset' })
+      },
+      {
+        props: { variant: 'body2' },
+        style: ({ theme }) => ({ color: theme.palette.text.secondary, marginBottom: 'unset' })
+      },
+      {
+        props: { variant: 'button' },
+        style: ({ theme }) => ({ textTransform: 'none', color: theme.palette.text.primary })
+      },
+      {
+        props: { variant: 'caption' },
+        style: ({ theme }) => ({ color: theme.palette.text.secondary })
+      },
+      {
+        props: { variant: 'overline' },
+        style: ({ theme }) => ({ color: theme.palette.text.secondary })
+      }
+    ]
   }
 }
 
