@@ -1,4 +1,19 @@
-import { useContext } from 'react'
-import { AuthContext } from 'src/context/AuthContext'
+'use client'
 
-export const useAuth = () => useContext(AuthContext)
+import { useEffect } from 'react'
+
+import { useRouter } from 'next/navigation'
+
+import userPool from '@/lib/cognitoConfig'
+
+export const useAuth = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    const user = userPool.getCurrentUser()
+
+    if (!user) {
+      router.push('/login')
+    }
+  }, [router])
+}

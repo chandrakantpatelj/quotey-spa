@@ -1,96 +1,200 @@
-// ** Util Imports
-import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
-
-const Chip = () => {
-  return {
-    MuiChip: {
-      styleOverrides: {
-        root: ({ theme, ownerState }) => ({
-          fontWeight: 400,
-          // borderRadius: 5,
-          // lineHeight: 1,
-
-          fontSize: '12px',
-          ...(ownerState.size === 'medium' && {
-            height: 25
-          }),
-          ...(ownerState.size === 'small' && {
-            fontSize: '10px',
-            height: 20
-          }),
-          '&.MuiChip-rounded': {
-            borderRadius: 4
-          }
-        }),
-        outlined: ({ theme }) => ({
-          '&.MuiChip-colorDefault': {
-            borderColor: `rgba(${theme.palette.customColors.main}, 0.2)`
-            // backgroundColor: `rgba(${theme.palette.customColors.main}, 0.2) !important`
-          }
-        }),
-        labelSmall: ({ theme }) => ({
-          paddingLeft: theme.spacing(2.5),
-          paddingRight: theme.spacing(2.5)
-        }),
-        deleteIcon: {
-          width: 16,
-          height: 16
+const chip = {
+  MuiChip: {
+    styleOverrides: {
+      root: ({ ownerState, theme }) => ({
+        ...theme.typography.body2,
+        fontWeight: theme.typography.fontWeightMedium,
+        '&.MuiChip-outlined:not(.MuiChip-colorDefault)': {
+          borderColor: `var(--mui-palette-${ownerState.color}-main)`
         },
-        avatar: ({ theme }) => ({
-          color: theme.palette.text.primary
-        }),
-        deletableColorPrimary: ({ theme }) => ({
-          backgroundColor: `${hexToRGBA(theme.palette.primary.main, 0.1)} !important`,
-          '&.MuiChip-light .MuiChip-deleteIcon': {
-            color: hexToRGBA(theme.palette.primary.main, 0.8),
-            '&:hover': {
-              color: theme.palette.primary.main
+        ...(ownerState.size === 'small'
+          ? {
+              borderRadius: 'var(--mui-shape-customBorderRadius-sm)'
+            }
+          : {
+              borderRadius: 'var(--mui-shape-borderRadius)'
+            }),
+        '& .MuiChip-deleteIcon': {
+          ...(ownerState.size === 'small'
+            ? {
+                fontSize: '1rem',
+                marginInlineEnd: theme.spacing(1),
+                marginInlineStart: theme.spacing(-2)
+              }
+            : {
+                fontSize: '1.25rem',
+                marginInlineEnd: theme.spacing(1.5),
+                marginInlineStart: theme.spacing(-2)
+              })
+        },
+        '& .MuiChip-avatar, & .MuiChip-icon': {
+          '& i, & svg': {
+            ...(ownerState.size === 'small'
+              ? {
+                  fontSize: 13
+                }
+              : {
+                  fontSize: 15
+                })
+          },
+          ...(ownerState.size === 'small'
+            ? {
+                blockSize: 16,
+                inlineSize: 16,
+                marginInlineStart: theme.spacing(1),
+                marginInlineEnd: theme.spacing(-1.5)
+              }
+            : {
+                blockSize: 20,
+                inlineSize: 20,
+                marginInlineStart: theme.spacing(1.5),
+                marginInlineEnd: theme.spacing(-2)
+              })
+        },
+        '&.Mui-disabled': {
+          opacity: 0.45
+        },
+        variants: [
+          {
+            props: { variant: 'tonal', color: 'primary' },
+            style: {
+              backgroundColor: 'var(--mui-palette-primary-lightOpacity)',
+              color: 'var(--mui-palette-primary-main)',
+              '&.Mui-focusVisible': {
+                backgroundColor: 'var(--mui-palette-primary-mainOpacity)'
+              },
+              '& .MuiChip-deleteIcon': {
+                color: 'rgb(var(--mui-palette-primary-mainChannel) / 0.7)',
+                '&:hover': {
+                  color: 'var(--mui-palette-primary-main)'
+                }
+              },
+              '&.MuiChip-clickable:hover': {
+                backgroundColor: 'var(--mui-palette-primary-main)',
+                color: 'var(--mui-palette-common-white)'
+              }
+            }
+          },
+          {
+            props: { variant: 'tonal', color: 'secondary' },
+            style: {
+              backgroundColor: 'var(--mui-palette-secondary-lightOpacity)',
+              color: 'var(--mui-palette-secondary-main)',
+              '&.Mui-focusVisible': {
+                backgroundColor: 'var(--mui-palette-secondary-mainOpacity)'
+              },
+              '& .MuiChip-deleteIcon': {
+                color: 'rgb(var(--mui-palette-secondary-mainChannel) / 0.7)',
+                '&:hover': {
+                  color: 'var(--mui-palette-secondary-main)'
+                }
+              },
+              '&.MuiChip-clickable:hover': {
+                backgroundColor: 'var(--mui-palette-secondary-main)',
+                color: 'var(--mui-palette-common-white)'
+              }
+            }
+          },
+          {
+            props: { variant: 'tonal', color: 'error' },
+            style: {
+              backgroundColor: 'var(--mui-palette-error-lightOpacity)',
+              color: 'var(--mui-palette-error-main)',
+              '&.Mui-focusVisible': {
+                backgroundColor: 'var(--mui-palette-error-mainOpacity)'
+              },
+              '& .MuiChip-deleteIcon': {
+                color: 'rgb(var(--mui-palette-error-mainChannel) / 0.7)',
+                '&:hover': {
+                  color: 'var(--mui-palette-error-main)'
+                }
+              },
+              '&.MuiChip-clickable:hover': {
+                backgroundColor: 'var(--mui-palette-error-main)',
+                color: 'var(--mui-palette-common-white)'
+              }
+            }
+          },
+          {
+            props: { variant: 'tonal', color: 'warning' },
+            style: {
+              backgroundColor: 'var(--mui-palette-warning-lightOpacity)',
+              color: 'var(--mui-palette-warning-main)',
+              '&.Mui-focusVisible': {
+                backgroundColor: 'var(--mui-palette-warning-mainOpacity)'
+              },
+              '& .MuiChip-deleteIcon': {
+                color: 'rgb(var(--mui-palette-warning-mainChannel) / 0.7)',
+                '&:hover': {
+                  color: 'var(--mui-palette-warning-main)'
+                }
+              },
+              '&.MuiChip-clickable:hover': {
+                backgroundColor: 'var(--mui-palette-warning-main)',
+                color: 'var(--mui-palette-common-white)'
+              }
+            }
+          },
+          {
+            props: { variant: 'tonal', color: 'info' },
+            style: {
+              backgroundColor: 'var(--mui-palette-info-lightOpacity)',
+              color: 'var(--mui-palette-info-main)',
+              '&.Mui-focusVisible': {
+                backgroundColor: 'var(--mui-palette-info-mainOpacity)'
+              },
+              '& .MuiChip-deleteIcon': {
+                color: 'rgb(var(--mui-palette-info-mainChannel) / 0.7)',
+                '&:hover': {
+                  color: 'var(--mui-palette-info-main)'
+                }
+              },
+              '&.MuiChip-clickable:hover': {
+                backgroundColor: 'var(--mui-palette-info-main)',
+                color: 'var(--mui-palette-common-white)'
+              }
+            }
+          },
+          {
+            props: { variant: 'tonal', color: 'success' },
+            style: {
+              backgroundColor: 'var(--mui-palette-success-lightOpacity)',
+              color: 'var(--mui-palette-success-main)',
+              '&.Mui-focusVisible': {
+                backgroundColor: 'var(--mui-palette-success-mainOpacity)'
+              },
+              '& .MuiChip-deleteIcon': {
+                color: 'rgb(var(--mui-palette-success-mainChannel) / 0.7)',
+                '&:hover': {
+                  color: 'var(--mui-palette-success-main)'
+                }
+              },
+              '&.MuiChip-clickable:hover': {
+                backgroundColor: 'var(--mui-palette-success-main)',
+                color: 'var(--mui-palette-common-white)'
+              }
             }
           }
-        }),
-        deletableColorSecondary: ({ theme }) => ({
-          '&.MuiChip-light .MuiChip-deleteIcon': {
-            color: hexToRGBA(theme.palette.secondary.main, 0.6),
-            '&:hover': {
-              color: theme.palette.secondary.main
+        ]
+      }),
+      label: ({ ownerState, theme }) => ({
+        ...(ownerState.size === 'small'
+          ? {
+              paddingInline: theme.spacing(2.5),
+              paddingBlock: theme.spacing(0.5)
             }
-          }
-        }),
-        deletableColorSuccess: ({ theme }) => ({
-          '&.MuiChip-light .MuiChip-deleteIcon': {
-            color: hexToRGBA(theme.palette.success.main, 0.7),
-            '&:hover': {
-              color: theme.palette.success.main
-            }
-          }
-        }),
-        deletableColorError: ({ theme }) => ({
-          '&.MuiChip-light .MuiChip-deleteIcon': {
-            color: hexToRGBA(theme.palette.error.main, 0.7),
-            '&:hover': {
-              color: theme.palette.error.main
-            }
-          }
-        }),
-        deletableColorWarning: ({ theme }) => ({
-          '&.MuiChip-light .MuiChip-deleteIcon': {
-            color: hexToRGBA(theme.palette.warning.main, 0.7),
-            '&:hover': {
-              color: theme.palette.warning.main
-            }
-          }
-        }),
-        deletableColorInfo: ({ theme }) => ({
-          '&.MuiChip-light .MuiChip-deleteIcon': {
-            color: hexToRGBA(theme.palette.info.main, 0.7),
-            '&:hover': {
-              color: theme.palette.info.main
-            }
-          }
-        })
+          : {
+              paddingInline: theme.spacing(3)
+            })
+      }),
+      iconMedium: {
+        fontSize: '1.25rem'
+      },
+      iconSmall: {
+        fontSize: '1rem'
       }
     }
   }
 }
 
-export default Chip
+export default chip
