@@ -1,42 +1,45 @@
-import { FamilyRestroomRounded } from '@mui/icons-material'
-
-/**
- * Config
- * -------------------------------------------------------------------------------------
- * ! IMPORTANT: Make sure you clear the browser local storage in order to see the config changes in the template.
- * ! To clear local storage, you may refer https://www.leadshook.com/help/how-to-clear-local-storage-in-google-chrome-browser/.
+/*
+ * If you change the following items in the config object, you will not see any effect in the local development server
+ * as these are stored in the cookie (cookie has the highest priority over the themeConfig):
+ * 1. mode
+ * 2. skin
+ * 3. semiDark
+ * 4. layout
+ * 5. navbar.contentWidth
+ * 6. contentWidth
+ * 7. footer.contentWidth
+ *
+ * To see the effect of the above items, you can click on the reset button from the Customizer
+ * which is on the top-right corner of the customizer besides the close button.
+ * This will reset the cookie to the values provided in the config object below.
+ *
+ * Another way is to clear the cookie from the browser's Application/Storage tab and then reload the page.
  */
 const themeConfig = {
-  // ** Layout Configs
-  templateName: 'Warehouse' /* App Name */,
-  layout: 'vertical' /* vertical | horizontal */,
-  mode: 'light' /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,
-  direction: 'ltr' /* ltr | rtl */,
-  skin: 'bordered' /* default | bordered */,
-  contentWidth: 'full' /* full | boxed */,
-  footer: 'static' /* fixed | static | hidden */,
-  // ** Routing Configs
-  routingLoader: true /* true | false */,
-  // ** Navigation (Menu) Configs
-  navHidden: false /* true | false */,
-  menuTextTruncate: FamilyRestroomRounded /* true | false */,
-  navSubItemIcon: 'material-symbols:circle' /* Icon */,
-  verticalNavToggleType: 'accordion' /* accordion | collapse /*! Note: This is for Vertical navigation menu only */,
-  navCollapsed: false /* true | false /*! Note: This is for Vertical navigation menu only */,
-  navigationSize: 265 /* Number in px(Pixels) /*! Note: This is for Vertical navigation menu only */,
-  collapsedNavigationSize: 82 /* Number in px(Pixels) /*! Note: This is for Vertical navigation menu only */,
-  afterVerticalNavMenuContentPosition: 'fixed' /* fixed | static */,
-  beforeVerticalNavMenuContentPosition: 'fixed' /* fixed | static */,
-  horizontalMenuToggle: 'hover' /* click | hover /*! Note: This is for Horizontal navigation menu only */,
-  horizontalMenuAnimation: true /* true | false */,
-  // ** AppBar Configs
-  appBar: 'fixed' /* fixed | static | hidden /*! Note: hidden value will only work for Vertical Layout */,
-  appBarBlur: true /* true | false */,
-  // ** Other Configs
-  responsiveFontSizes: true /* true | false */,
-  disableRipple: true /* true | false */,
-  disableCustomizer: true /* true | false */,
-  toastPosition: 'bottom-right' /* top-left | top-center | top-right | bottom-left | bottom-center | bottom-right */
+  templateName: 'Vuexy',
+  homePageUrl: '/dashboards/crm',
+  settingsCookieName: 'vuexy-mui-next-demo-1',
+  mode: 'system', // 'system', 'light', 'dark'
+  skin: 'default', // 'default', 'bordered'
+  semiDark: false, // true, false
+  layout: 'vertical', // 'vertical', 'collapsed', 'horizontal'
+  layoutPadding: 24, // Common padding for header, content, footer layout components (in px)
+  compactContentWidth: 1440, // in px
+  navbar: {
+    type: 'fixed', // 'fixed', 'static'
+    contentWidth: 'compact', // 'compact', 'wide'
+    floating: true, //! true, false (This will not work in the Horizontal Layout)
+    detached: true, //! true, false (This will not work in the Horizontal Layout or floating navbar is enabled)
+    blur: true // true, false
+  },
+  contentWidth: 'compact', // 'compact', 'wide'
+  footer: {
+    type: 'static', // 'fixed', 'static'
+    contentWidth: 'compact', // 'compact', 'wide'
+    detached: true //! true, false (This will not work in the Horizontal Layout)
+  },
+  disableRipple: false, // true, false
+  toastPosition: 'top-right' // 'top-right', 'top-center', 'top-left', 'bottom-right', 'bottom-center', 'bottom-left'
 }
 
 export default themeConfig
