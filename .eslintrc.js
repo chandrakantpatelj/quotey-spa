@@ -1,53 +1,97 @@
 module.exports = {
-  env: {
-    node: true,
-    es6: true,
-    browser: true
-  },
-  parser: '@babel/eslint-parser',
-  extends: ['next/core-web-vitals', 'prettier'],
-  parserOptions: {
-    ecmaVersion: 11,
-    sourceType: 'module',
-    project: './jsconfig.json',
-    ecmaFeatures: {
-      jsx: true,
-      modules: true,
-      experimentalObjectRestSpread: true
-    }
-  },
+  extends: ['next/core-web-vitals', 'plugin:import/recommended', 'prettier'],
   rules: {
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'jsx-a11y/alt-text': 'off',
     'react/display-name': 'off',
+    'react/no-children-prop': 'off',
     '@next/next/no-img-element': 'off',
-    'react/no-unescaped-entities': 'off',
-    'import/no-anonymous-default-export': 'off',
-
-    // add new line above comment
-    /*'lines-around-comment': [
+    '@next/next/no-page-custom-font': 'off',
+    'lines-around-comment': [
       'error',
       {
-        beforeLineComment: true,
         beforeBlockComment: true,
+        beforeLineComment: true,
         allowBlockStart: true,
-        allowClassStart: true,
         allowObjectStart: true,
         allowArrayStart: true
       }
-    ],*/
-
-    // add new line above return
-    'newline-before-return': 'off',
-
-    // add new line below import
-    'import/newline-after-import': 'off',
-
-    // add new line after each var, const, let declaration
-    /*'padding-line-between-statements': [
+    ],
+    'padding-line-between-statements': [
       'error',
-      { blankLine: 'always', prev: ['export'], next: ['*'] },
-      { blankLine: 'always', prev: ['*'], next: ['multiline-const', 'multiline-let', 'multiline-var', 'export'] }
-    ]*/
-  }
+      {
+        blankLine: 'any',
+        prev: 'export',
+        next: 'export'
+      },
+      {
+        blankLine: 'always',
+        prev: ['const', 'let', 'var'],
+        next: '*'
+      },
+      {
+        blankLine: 'any',
+        prev: ['const', 'let', 'var'],
+        next: ['const', 'let', 'var']
+      },
+      {
+        blankLine: 'always',
+        prev: '*',
+        next: ['function', 'multiline-const', 'multiline-block-like']
+      },
+      {
+        blankLine: 'always',
+        prev: ['function', 'multiline-const', 'multiline-block-like'],
+        next: '*'
+      }
+    ],
+    'newline-before-return': 'error',
+    'import/newline-after-import': [
+      'error',
+      {
+        count: 1
+      }
+    ],
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', ['internal', 'parent', 'sibling', 'index'], ['object', 'unknown']],
+        pathGroups: [
+          {
+            pattern: 'react',
+            group: 'external',
+            position: 'before'
+          },
+          {
+            pattern: 'next/**',
+            group: 'external',
+            position: 'before'
+          },
+          {
+            pattern: '~/**',
+            group: 'external',
+            position: 'before'
+          },
+          {
+            pattern: '@/**',
+            group: 'internal'
+          }
+        ],
+        pathGroupsExcludedImportTypes: ['react', 'type'],
+        'newlines-between': 'always-and-inside-groups'
+      }
+    ]
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    },
+    'import/parsers': {},
+    'import/resolver': {
+      node: {},
+      typescript: {
+        project: './jsconfig.json'
+      }
+    }
+  },
+  overrides: []
 }

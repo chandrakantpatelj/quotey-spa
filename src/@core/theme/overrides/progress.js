@@ -1,21 +1,19 @@
-const Progress = () => {
-  return {
-    MuiLinearProgress: {
-      styleOverrides: {
-        root: ({ theme }) => ({
-          height: 7,
-          borderRadius: '10px',
-          backgroundColor: theme.palette.customColors.trackBg,
-          '& .MuiLinearProgress-dashed': {
-            marginTop: theme.spacing(1)
-          }
-        }),
-        bar: {
-          borderRadius: '10px'
+const progress = {
+  MuiLinearProgress: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        blockSize: 6,
+        borderRadius: 'var(--mui-shape-borderRadius)',
+        backgroundColor: 'var(--mui-palette-customColors-trackBg)',
+        '& .MuiLinearProgress-bar': {
+          borderRadius: 'var(--mui-shape-borderRadius)'
+        },
+        '& .MuiLinearProgress-dashed': {
+          marginTop: theme.spacing(0.2)
         }
-      }
+      })
     }
   }
 }
 
-export default Progress
+export default progress
